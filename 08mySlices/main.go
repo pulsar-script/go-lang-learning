@@ -57,6 +57,7 @@ func main() {
 	// - help in performance optimization
 	highscores = append(highscores, 765, 999, 111)
 	fmt.Println(highscores)
+	fmt.Printf("The type of variable is %T \n", highscores)
 
 	//* Sorting
 	sort.Ints(highscores)
