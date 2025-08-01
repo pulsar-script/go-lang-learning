@@ -63,4 +63,14 @@ func main() {
 	sort.Ints(highscores)
 	fmt.Println(highscores)
 	fmt.Println(sort.IntsAreSorted(highscores))
+
+	// how to remove element from slice based on index
+	var courses = []string{"java", "go", "js", "swift", "python", "kotlin"}
+	fmt.Println("Default Value", courses)
+
+	var index int = 2
+
+	courses = append(courses[:index], courses[index+1:]...) // elements before : index && (index + 1) : elements after index
+	fmt.Println("Updated value after remove", courses)
+
 }
