@@ -15,13 +15,13 @@ func main() {
 		// generate random number
 		// Create a new random generator with a time-based seed
 		r := rand.New(rand.NewSource(time.Now().UnixMicro()))
-		SecretNumber := r.Intn(5) + 1
+		SecretNumber := r.Intn(10) + 1
 
 		// loop 5 chances
 		for i := 1; i <= 5; i++ {
 
 			// take input within range
-			userNum := getNumberInRange(1, 5)
+			userNum := getNumberInRange(1, 10)
 			// call checking func
 			var isWin bool = checkGuessing(SecretNumber, userNum, 5-i)
 
