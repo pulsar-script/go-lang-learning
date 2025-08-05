@@ -1,0 +1,10 @@
+What keyword is used to define a new type based on an existing one in Go?,type,struct,interface,0
+Which package is essential for reading and writing to the standard terminal?,io,fmt,os,1
+How do you declare and initialize a variable in one line using type inference?,var name = value,name := value,string name = value,1
+What is the zero value for a slice?,0,nil,[],1
+How do you handle potential errors returned from a function in Go?,By checking if the error variable is not nil,Using a try-catch block,Ignoring them,0
+What is a struct in Go?,A function that takes no arguments,A way to define custom data types with fields,A built-in type for text,1
+Which function is used to read data from a file into a slice of bytes?,os.ReadFile,io.Read,fmt.Scan,0
+What does the range keyword do in a for loop?,It returns the length of a collection,It iterates over elements in a collection, providing the index and value,1
+How do you implement a timed operation that stops after a specific duration?,time.Sleep(),time.After(),time.Now(),1
+Which command is used to run all test files in the current directory?,go build,go test,go run,1
