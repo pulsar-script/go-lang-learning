@@ -560,7 +560,6 @@ func (list *List) loadAndStore() error {
 
 	// reading file
 	jsonData, err := os.ReadFile("todoList.json")
-	checkErrorNil(err)
 
 	// error handling for file not exits
 	if errors.Is(err, os.ErrNotExist) {
