@@ -40,23 +40,23 @@ func main() {
 			// fmt.Println("File - ", fileName)
 
 			// extract file extension from from file name
-			fileExtension := filepath.Ext(fileName)
+			fileExtension := filepath.Ext(fileName) // => .jpg
 
 			// find its sorting Dir by using rules
-			destinationDirName := Rules[fileExtension]
+			destinationDirName := Rules[fileExtension] // ==> imagesDir
 
 			// TODO if sorting folder not exists
 			if destinationDirName == "" {
-				destinationDirName = "mesclenious"
+				destinationDirName = "mescllenious"
 			}
 
 			rootDir := "./sortedDir"
 			// full path
-			destinationDirPath := filepath.Join(rootDir, destinationDirName)
+			destinationDirPath := filepath.Join(rootDir, destinationDirName) // ==> ./sortedDir/imagesDir/
 			// *TEST
 			// fmt.Println(destinationDirPath)
 
-			//if destination Dir not exists e.g. imagesDir , documentsDir
+			//if destination Dir not exists e.g. imagesDir , documentsDir , | if exists then no problem , nothing to do
 			// lets make then
 			err := os.MkdirAll(destinationDirPath, 0755)
 
@@ -67,8 +67,8 @@ func main() {
 			}
 
 			// to move files , we need full source path and destination path
-			sourceDirFullPath := filepath.Join("./messayDir", fileName)
-			destinationDirFullPath := filepath.Join(destinationDirPath, fileName)
+			sourceDirFullPath := filepath.Join("./messayDir", fileName)           //==> ./messayDir/monkey.jpg
+			destinationDirFullPath := filepath.Join(destinationDirPath, fileName) //==> ./sortedDir/imagesDir/monkey.jpg
 
 			// moving files
 			err = os.Rename(sourceDirFullPath, destinationDirFullPath)
