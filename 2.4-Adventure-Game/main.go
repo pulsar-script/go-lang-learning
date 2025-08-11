@@ -52,7 +52,7 @@ func main() {
 	Lab := Room{
 		ID:          "lab",
 		Name:        "Alchemist's Lab",
-		Description: "You are in your master's messy laboratory. Bubbling beakers ⚗️ and strange contraptions cover every table. In the center of the room is a large Cauldron 🔥. The master's enormous Recipe Book 📖 sits on a pedestal. Doors lead north, south, east, and west.",
+		Description: "\nYou are in your master's messy laboratory. \nBubbling beakers ⚗️ and strange contraptions cover every table. \nIn the center of the room is a large Cauldron 🔥. \nThe master's enormous Recipe Book 📖 sits on a pedestal. \nDoors lead north, south, east, and west.\n",
 		Exits:       make(map[string]*Room),
 		Items:       make(map[string]*Item),
 	}
@@ -61,7 +61,7 @@ func main() {
 	Cave := Room{
 		ID:          "cave",
 		Name:        "The Crystal Caves",
-		Description: "You enter a breathtaking cave where the walls are covered in glowing crystals. The air hums with energy ✨. A particularly bright Glimmering Crystal is embedded in the far wall. The only way out is back east to the lab.",
+		Description: "\nYou enter a breathtaking cave where the walls are covered in glowing crystals. \nThe air hums with energy ✨. \nA particularly bright Glimmering Crystal is embedded in the far wall. \nThe only way out is back east to the lab.\n",
 		Exits:       make(map[string]*Room),
 		Items:       make(map[string]*Item),
 	}
@@ -70,7 +70,7 @@ func main() {
 	Grove := Room{
 		ID:          "grove",
 		Name:        "Moonpetal Grove",
-		Description: "You find a quiet, magical grove, bathed in moonlight 🌙. The plants here seem to glow with a soft, silver light. You see a single, perfect Silver Moonpetal 🌸 on a rare lunar orchid. A path leads back south.",
+		Description: "\nYou find a quiet, magical grove, bathed in moonlight 🌙. \nThe plants here seem to glow with a soft, silver light. \nYou see a single, perfect Silver Moonpetal 🌸 on a rare lunar orchid. \nA path leads back south.\n",
 		Exits:       make(map[string]*Room),
 		Items:       make(map[string]*Item),
 	}
@@ -80,7 +80,7 @@ func main() {
 
 		ID:          "riverbank",
 		Name:        "Whispering Riverbank",
-		Description: "You are standing on the bank of a gently flowing river 🏞️. The water is incredibly clear. Large, mossy stones near the edge are coated in sparkling River Dew 💧. The path back to the lab is to the north.",
+		Description: "\nYou are standing on the bank of a gently flowing river 🏞️. \nThe water is incredibly clear. \nLarge, mossy stones near the edge are coated in sparkling River Dew 💧. \nThe path back to the lab is to the north.\n",
 		Exits:       make(map[string]*Room),
 		Items:       make(map[string]*Item),
 	}
@@ -89,15 +89,15 @@ func main() {
 	Storeroom := Room{
 		ID:          "storeroom",
 		Name:        "Storeroom",
-		Description: "This is a dusty storeroom filled with empty boxes, cracked jars, and cobwebs 🕸️. It doesn't look like anything useful has been here for years. The only exit is west.",
+		Description: "\nThis is a dusty storeroom filled with empty boxes, cracked jars, and cobwebs 🕸️. \nIt doesn't look like anything useful has been here for years. \nThe only exit is west.\n",
 		Exits:       make(map[string]*Room),
 	}
 
 	// player
-	// ChemAssistant := Player{
-	// 	CurrentRoom: nil,
-	// 	Inventory:   make(map[string]*Item),
-	// }
+	ChemAssistant := Player{
+		CurrentRoom: nil,
+		Inventory:   make(map[string]*Item),
+	}
 
 	//* Linking items to rooms
 	//? why we cannot link rooms, items after each initilizalization
@@ -113,7 +113,7 @@ func main() {
 	Grove.Items["moonpetal"] = &Moonpetal
 
 	// Riverbank
-	Riverbank.Items["Dew"] = &Dew
+	Riverbank.Items["dew"] = &Dew
 
 	//* Linking Rooms to rooms
 
@@ -150,45 +150,75 @@ func main() {
 
 	fmt.Println("")
 	fmt.Println("=========================================== The Alchemist's Assistant ⚗️Adventure Game ============================================")
-	fmt.Print(" Your master, the great alchemist, has been called away on urgent business.\n A rare celestial event, the Starlight Convergence 🌟, is happening tonight!\n Your master left a note: \n The Elixir of Starlight must be completed by midnight. \n The recipe is in the grand grimoire. Do not fail! You must create the elixir.\n")
+	fmt.Print("\nYour master, the great alchemist, has been called away on urgent business.\n A rare celestial event, the Starlight Convergence 🌟, is happening tonight!\n Your master left a note: \n The Elixir of Starlight must be completed by midnight. \n The recipe is in the grand grimoire. Do not fail! You must create the elixir.\n")
 
-	// gameEngine:
-	// 	for {
+	ChemAssistant.loadNextRoom(&Lab)
+	// GameEngine:
+	for {
 
-	fmt.Println("")
-	fmt.Println("What do you want to do?")
-	fmt.Print(">")
-	scanner.Scan()
-	userInputCmd := scanner.Text()
+		fmt.Println("")
+		fmt.Println("\nWhat do you want to do?")
+		fmt.Print(">> ")
+		scanner.Scan()
+		userInputCmd := scanner.Text()
 
-	// *TEST
-	fmt.Printf("TEST 1 userInput => %#v\n", userInputCmd)
+		// *TEST
+		// fmt.Printf("TEST 1 userInput => %#v\n", userInputCmd)
 
-	// *TEST
-	userInputCmd = strings.TrimSpace(userInputCmd)
-	fmt.Printf("TEST 2 userInput => %#v", userInputCmd)
-	fmt.Println("\n-------------------------------------------")
+		// *TEST
+		// userInputCmd = strings.TrimSpace(userInputCmd)
+		// fmt.Printf("TEST 2 userInput => %#v", userInputCmd)
+		// fmt.Println("\n-------------------------------------------")
 
-	// *TEST
-	parts := strings.Fields(userInputCmd)
+		// *TEST
+		parts := strings.Fields(userInputCmd)
 
-	var Command string
-	var Argument string
+		var Command string
+		var Argument string
 
-	// Now you can safely access the command and its argument
-	if len(parts) > 0 {
+		// Now you can safely access the command and its argument
+		if len(parts) > 0 {
 
-		Command = parts[0]
-		fmt.Printf("The command is: %s\n", Command)
+			Command = parts[0]
+			fmt.Printf("The command is: %s\n", Command)
 
-		if len(parts) > 1 {
-			Argument = parts[1]
-			fmt.Printf("The argument is: %s\n", Argument)
+			if len(parts) > 1 {
+				Argument = parts[1]
+				fmt.Printf("The argument is: %s\n", Argument)
+			}
+
 		}
 
-	}
+		// switch cases
+		switch Command {
+		case "go":
+			ChemAssistant.travelToRoom(Argument) // e.g. go north
 
-	// }
+		case "read":
+			if Argument == "book" {
+				readBook(&ChemAssistant)
+
+			} else {
+				fmt.Println("")
+				fmt.Println("I don't understand that command.")
+			}
+
+		case "pick":
+			ChemAssistant.pickItem(Argument)
+			fmt.Printf("Inventory => %v", ChemAssistant.Inventory)
+
+		case "show":
+			if Argument == "inventory" {
+				ChemAssistant.showInventory()
+			} else {
+				fmt.Println("")
+				fmt.Println("I don't understand that command.")
+			}
+		default:
+			fmt.Println("")
+			fmt.Println("I don't understand that command.")
+		}
+	}
 
 }
 
@@ -220,6 +250,106 @@ type Player struct {
 // structure for all rooms
 type AllRooms struct {
 	roomsMap map[string]*Room
+}
+
+// * [Method] on Player struct
+func (player *Player) travelToRoom(nextRoomDirection string) {
+
+	//! also we no need to check with current room , we are traveling base on directions , not on locations name
+	// // checking if player is in that room already
+	// if player.CurrentRoom.ID == nextRoomDirection {   //! we cannot comapre them beacuse player have *Room.ID means , lab, cave == direction e.g. noeth , east
+	// 	fmt.Println("")
+	// 	fmt.Printf("You are already in %s Room\n", nextRoomDirection)
+	// }
+
+	// checking requiest next room have way from this room or not
+	nextRoom, ok := player.CurrentRoom.Exits[nextRoomDirection]
+
+	if ok {
+		player.loadNextRoom(nextRoom)
+		//? Why not *nextRoom ?
+		// actully e.g. nextRoom =  *lab , means it already passing pointer / original value , so no need to send address of pointer
+	} else {
+		fmt.Println("")
+		fmt.Println("You can't go that way.")
+		// continue GameEngine
+		//TODO [improvment] we can apply condition on commands with correct direction (that are not accessible to player in perticular room ), show cant go msg
+		//TODO and  for commands like e.g. go asdsw (gibrish), can show cant understand msg
+	}
+
+}
+
+// * [Method] for loading new room
+func (player *Player) loadNextRoom(nextRoom *Room) {
+
+	// updating players current room location
+	player.CurrentRoom = nextRoom
+
+	// printing next room text
+	fmt.Println("")
+	fmt.Println("------------------------------------------------------------------------------------------")
+	fmt.Printf("Current Room %v \n", player.CurrentRoom.Name)
+	fmt.Println("")
+	fmt.Printf("%v", player.CurrentRoom.Description)
+}
+
+// *function for Read Book
+func readBook(player *Player) {
+
+	// check player location , it should be lab
+	if player.CurrentRoom.ID == "lab" {
+		fmt.Println("")
+		fmt.Println("\nThe page for the Elixir of Starlight ✨ reads: \nCombine three sacred ingredients in the cauldron - a Glimmering Crystal 💎, \na Silver Moonpetal 🌸, and a drop of pure River Dew 💧.")
+	} else {
+		fmt.Println("")
+		fmt.Println("You don't see a Book here.")
+	}
+
+}
+
+// * [Method] for Player struct to check and add item into inventory
+func (player *Player) pickItem(itemStringName string) {
+
+	// check does item exits in that room
+	foundItem, ok1 := player.CurrentRoom.Items[itemStringName]
+
+	if !ok1 {
+		fmt.Println("")
+		fmt.Printf("You don't see a %v here.", itemStringName)
+		return
+	}
+
+	// if exists check , already taken or not
+	alreadyTakenItem, ok2 := player.Inventory[foundItem.ID]
+
+	if ok2 {
+		fmt.Println("")
+		fmt.Printf("You are already carrying %v.", alreadyTakenItem.Name)
+		return
+	}
+
+	// if not taken , then pick
+	player.Inventory[foundItem.ID] = foundItem // when we found item in room by comma, ok syntax => that foundted item is *pointer (actule item we get by that syntax)
+	// we can use that , for adding into invtory if we dont have added
+	fmt.Println("")
+	fmt.Printf("You have taken the %v.", player.Inventory[foundItem.ID].Name)
+
+}
+
+//* [Method] for Player struct to show Inventory
+
+func (player *Player) showInventory() {
+	fmt.Println("")
+	fmt.Println("You are carrying:")
+	// check inventory
+	if len(player.Inventory) > 0 {
+
+		for key, value := range player.Inventory {
+			fmt.Printf("[%v : %v]\t", key, value.Name)
+		}
+	} else {
+		fmt.Println("[ You are not carrying anything. ]")
+	}
 }
 
 // ============================================================================
