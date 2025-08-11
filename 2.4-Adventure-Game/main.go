@@ -590,7 +590,10 @@ func (cauldron *Cauldron) useItems(itemString string, player *Player) {
  * >> Use a SLICE only if the order is critical AND you rarely need to find
  * or remove a specific item from the middle of the list.
  */
-
+//
+//
+//
+//
 /*
 ================================================================================
     IMPORTANT LEARNING POINT: Where to Put Game Logic?
@@ -641,6 +644,13 @@ as the main "game engine" that processes commands and enforces the rules.
 
  GOOD EXAMPLE: The "use" command. This action involves multiple objects.
  Therefore, the World should be responsible for coordinating it.
+
+  To use an item, you need to check:
+  The Player's Inventory.
+  The Player's CurrentRoom.
+  The Cauldron's state.
+
+Since this action touches everything, making it a method on the World is a great choice. It acts as a central coordinator.
 
 func (w *World) HandleUseCommand(itemName string) {
      The world knows about all its parts.
